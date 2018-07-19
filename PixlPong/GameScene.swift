@@ -9,88 +9,146 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    let COUNT_DOWN:Int = 3
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
     private var lastUpdateTime : TimeInterval = 0
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    
+    var isMoving = false
+    
+    let ballCategory:UInt32   = 0x1 << 0
+    let bottomCategory:UInt32 = 0x1 << 1
+    let paddleCategory:UInt32 = 0x1 << 2
+    
+    var lblCount:SKLabelNode!
+    var lblScore:SKLabelNode!
+    var ballNode:SKSpriteNode!
+    var upBar:SKSpriteNode!
+    var downBar:SKSpriteNode!
+    var leftBar:SKSpriteNode!
+    var rightBar:SKSpriteNode!
+    
+    var score:Double = 0 {
+        didSet{
+            lblScore.text = "Score: \(Int(score))"
+        }
+    }
     
     override func sceneDidLoad() {
-
         self.lastUpdateTime = 0
+    }
+    
+    override func didMove(to view: SKView) {
+        // Config labels
+        lblCount = self.childNode(withName: "lblCount") as? SKLabelNode
+        lblScore = self.childNode(withName: "scoreLabel") as? SKLabelNode
+        lblScore.fontName = "ChalkboardSE-Regular"
+        score = 0
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
+        // Config world
+        self.physicsWorld.gravity = CGVector.zero
+        let borderBody:SKPhysicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        self.physicsBody = borderBody
+        self.physicsBody?.friction = 0.0
+        self.physicsWorld.contactDelegate = self
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        // Config Bars & Ball
+        ballNode = self.childNode(withName: "ball") as? SKSpriteNode
+        ballNode.physicsBody = SKPhysicsBody(rectangleOf: ballNode.size)
+        ballNode.physicsBody?.friction = 0.0
+        ballNode.physicsBody?.restitution = 1.0
+        ballNode.physicsBody?.linearDamping = 0
+        ballNode.physicsBody?.allowsRotation = true
         
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
+        upBar = self.childNode(withName: "upBar") as? SKSpriteNode
+        upBar.physicsBody = barPhysicsBodyOfSize(upBar.size)
+        
+        downBar = self.childNode(withName: "downBar") as? SKSpriteNode
+        downBar.physicsBody = barPhysicsBodyOfSize(downBar.size)
+        
+        leftBar = self.childNode(withName: "leftBar") as? SKSpriteNode
+        leftBar.physicsBody = barPhysicsBodyOfSize(leftBar.size)
+        
+        rightBar = self.childNode(withName: "rightBar") as? SKSpriteNode
+        rightBar.physicsBody = barPhysicsBodyOfSize(rightBar.size)
+        
+        self.physicsBody?.categoryBitMask        = bottomCategory
+        ballNode.physicsBody?.categoryBitMask    = ballCategory
+        upBar.physicsBody?.categoryBitMask       = paddleCategory
+        downBar.physicsBody?.categoryBitMask     = paddleCategory
+        leftBar.physicsBody?.categoryBitMask     = paddleCategory
+        rightBar.physicsBody?.categoryBitMask    = paddleCategory
+        ballNode.physicsBody?.contactTestBitMask = bottomCategory | paddleCategory
+        
+        // Start count down & game
+        showCountDown(count: COUNT_DOWN)
+        startGame(afterTime: COUNT_DOWN + 1)
+        
     }
     
-    
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-    }
+    // MARK: - Touches -
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
         
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        if let touch = touches.first {
+            let touchPoint = touch.location(in: self)
+            let prevLoc = touch.previousLocation(in: self)
+            
+            var yBar = leftBar.position.y + (touchPoint.y - prevLoc.y)
+            var xBar = upBar.position.x + (touchPoint.x - prevLoc.x)
+            
+            let yTop = self.size.height/2.0 - leftBar.size.height
+            let xTop = (self.size.width - upBar.size.width)/2.0
+            
+            yBar = min(yTop, max(yBar,-yTop))
+            xBar = min(xTop, max(xBar,-xTop))
+            
+            leftBar.position  = CGPoint(x: leftBar.position.x,  y: yBar)
+            rightBar.position = CGPoint(x: rightBar.position.x, y: yBar)
+            upBar.position    = CGPoint(x: xBar, y: upBar.position.y)
+            downBar.position  = CGPoint(x: xBar, y: downBar.position.y)
+        }
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        ballNode.run(SKAction.speed(to: 0, duration: 0.1))
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        
     }
     
-    
+    // MARK: - Update -
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        let dx:CGFloat = (ballNode.physicsBody?.velocity.dx)!
+        let dy:CGFloat = (ballNode.physicsBody?.velocity.dy)!
+        
+        let speed:CGFloat = sqrt(dx*dx + dy*dy)
+        
+        if isMoving {
+            if speed < 360 || fabs(dx) < 10 || fabs(dy) < 10 {
+                ballNode.physicsBody?.applyImpulse(randomImpulse())
+            }
+            if speed < 30 {
+                ballNode.physicsBody?.applyImpulse(randomImpulse())
+            }
+        }
+        if speed <= 0 {
+            isMoving = false
+        }
+        
+        if ballIsOut() {
+            returnAndStartAgain()
+        }
         
         // Initialize _lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
@@ -106,5 +164,112 @@ class GameScene: SKScene {
         }
         
         self.lastUpdateTime = currentTime
+    }
+    
+    // MARK: - Functions -
+    
+    func startGame(afterTime time:Int){
+        let wait:SKAction = SKAction.wait(forDuration: TimeInterval(time))
+        let move:SKAction = SKAction.run {
+            self.startMoving()
+        }
+        let sequence:SKAction = SKAction.sequence([wait, move])
+        self.run(sequence){
+            self.lblCount.text = nil
+        }
+    }
+    
+    func showCountDown(count:Int){
+        for i in (0...count).reversed() {
+            fadeNumber(i, withDelay:TimeInterval(count-i))
+        }
+    }
+    
+    func fadeNumber(_ num:Int, withDelay delayTime:TimeInterval){
+        if lblCount != nil {
+            let scaleDown:SKAction = SKAction.scale(to: 0.001, duration: 0.01)
+            let changeText:SKAction = SKAction.run({
+                DispatchQueue.main.async {
+                    self.lblCount.text = "\(num)"
+                }
+                
+            })
+            let before:SKAction = SKAction.group([scaleDown, changeText])
+            
+            let delay:SKAction = SKAction.wait(forDuration: delayTime as TimeInterval)
+            
+            let fadeIn:SKAction = SKAction.fadeIn(withDuration: 0.2)
+            let scaleUp:SKAction = SKAction.scale(to: 1.0, duration: 0.2)
+            let initGroup = SKAction.group([fadeIn,scaleUp])
+            
+            let wait:SKAction = SKAction.wait(forDuration: 0.5)
+            
+            let fadeOut:SKAction = SKAction.fadeOut(withDuration: 0.1)
+            let scaleMore:SKAction = SKAction.scale(to: 3.0, duration: 0.1)
+            let finishGroup:SKAction = SKAction.group([fadeOut, scaleMore])
+            
+            let sequence:SKAction = SKAction.sequence([delay, initGroup, wait, finishGroup])
+            
+            lblCount.run(sequence, completion: {
+                self.lblCount.run(before){
+                }
+            })
+        }
+    }
+    
+    func startMoving(){
+        if !isMoving {
+            isMoving = true
+            ballNode.physicsBody?.applyImpulse(randomImpulse())
+        }
+    }
+    
+    func randomImpulse() -> CGVector {
+        let random:GKRandomSource = GKRandomSource.sharedRandom()
+        var dx:Int = random.nextInt(upperBound: 50) + 20
+        var dy:Int = random.nextInt(upperBound: 50) + 20
+        let n1:Int = random.nextInt(upperBound: 100)
+        let n2:Int = random.nextInt(upperBound: 100)
+        
+        if n1%3 == 0 {
+            dx = -dx
+        }
+        if n2%3 == 0 {
+            dy = -dy
+        }
+        
+        return CGVector(dx: dx, dy: dy)
+    }
+    
+    func barPhysicsBodyOfSize(_ size:CGSize) -> SKPhysicsBody {
+        let bar:SKPhysicsBody = SKPhysicsBody(rectangleOf: size)
+        bar.friction = 0.0
+        bar.restitution = 1.0
+        bar.isDynamic = false
+        return bar
+    }
+    
+    func ballIsOut() -> Bool {
+        if ballNode.position.x < -self.size.width || ballNode.position.x > self.size.width {
+            print("x out of bounds")
+            return true
+        }
+        if ballNode.position.y < -self.size.height || ballNode.position.y > self.size.height {
+            print("y out of bounds")
+            return true
+        }
+        return false
+    }
+    
+    func returnAndStartAgain(){
+        isMoving = false
+        ballNode.position = CGPoint.zero
+        ballNode.physicsBody?.velocity = CGVector.zero
+        ballNode.physicsBody?.angularVelocity = 0
+        ballNode.physicsBody?.isResting = true
+        ballNode.speed = 0
+        
+        showCountDown(count: COUNT_DOWN)
+        startGame(afterTime: COUNT_DOWN + 1)
     }
 }
