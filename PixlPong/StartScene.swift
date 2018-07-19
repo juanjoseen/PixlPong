@@ -25,12 +25,12 @@ class StartScene: SKScene {
         startLbael = self.childNode(withName: "startNode") as? SKLabelNode
         startLbael?.fontName = "ChalkboardSE-Regular"
         
-        print("Fonts....")
-        for family in UIFont.familyNames.sorted() {
-            for name in UIFont.fontNames(forFamilyName: family) {
-                print(name)
-            }
-        }
+//        print("Fonts....")
+//        for family in UIFont.familyNames.sorted() {
+//            for name in UIFont.fontNames(forFamilyName: family) {
+//                print(name)
+//            }
+//        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
