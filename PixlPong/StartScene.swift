@@ -21,9 +21,14 @@ class StartScene: SKScene {
     var startLbael:SKLabelNode?
     
     override func didMove(to view: SKView) {
+        
+        self.size = CGSize(width: screenWidth, height: screenHeight)
+        
         settingsNode = self.childNode(withName: "settingsNode") as? SKSpriteNode
         startLbael = self.childNode(withName: "startNode") as? SKLabelNode
         startLbael?.fontName = "ChalkboardSE-Regular"
+        
+//        setupNodes()
         
 //        print("Fonts....")
 //        for family in UIFont.familyNames.sorted() {
@@ -31,6 +36,18 @@ class StartScene: SKScene {
 //                print(name)
 //            }
 //        }
+    }
+    
+    func setupNodes(){
+        // set Settings Node on top right corner with 32 points of padding
+        
+//        print("position: \(settingsNode?.position)")
+        
+        let x:CGFloat = (size.width - ((settingsNode?.frame.width)! + 64))/2
+        let y:CGFloat = (size.height - ((settingsNode?.frame.height)! + 32))/2
+        settingsNode?.position = CGPoint(x: x, y: y)
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

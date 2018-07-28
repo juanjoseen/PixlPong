@@ -22,6 +22,9 @@ class SettingsScene: SKScene {
     
     // MARK: - Methods -
     override func didMove(to view: SKView) {
+        
+        self.size = CGSize(width: screenWidth, height: screenHeight)
+        
         btnCancel = self.childNode(withName: "btnCancel") as? SKSpriteNode
         btnSave = self.childNode(withName: "btnSave") as? SKSpriteNode
         lblCancel = btnCancel?.childNode(withName: "lblCancel") as? SKLabelNode

@@ -43,6 +43,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
+        
+        self.size = CGSize(width: screenWidth, height: screenHeight)
+        
         // Config labels
         lblCount = self.childNode(withName: "lblCount") as? SKLabelNode
         lblScore = self.childNode(withName: "scoreLabel") as? SKLabelNode
@@ -84,10 +87,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightBar.physicsBody?.categoryBitMask    = paddleCategory
         ballNode.physicsBody?.contactTestBitMask = bottomCategory | paddleCategory
         
+        configBars()
+        
         // Start count down & game
         showCountDown(count: COUNT_DOWN)
         startGame(afterTime: COUNT_DOWN + 1)
         
+    }
+    
+    func configBars(){
+        if UIDevice.modelName == "iPhone X"{
+            let leftX:CGFloat = 0 - screenWidth/2 + 25
+            leftBar.position = CGPoint(x: leftX, y: leftBar.position.y)
+            
+            let rightX:CGFloat = (screenWidth - rightBar.frame.width)/2
+            rightBar.position = CGPoint(x: rightX, y: rightBar.position.y)
+        }
     }
     
     // MARK: - Touches -

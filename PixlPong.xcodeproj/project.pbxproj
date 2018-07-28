@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D26743F210B899F00E8A5E1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D26743E210B899F00E8A5E1 /* Extensions.swift */; };
 		0D3BEF4E204B1670007B138C /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D3BEF4D204B1670007B138C /* StartScene.sks */; };
 		0D3BEF50204B16B8007B138C /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3BEF4F204B16B8007B138C /* StartScene.swift */; };
 		0D4FC206204B209000879FEB /* SettingsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D4FC205204B209000879FEB /* SettingsScene.sks */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D26743E210B899F00E8A5E1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0D3BEF4D204B1670007B138C /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
 		0D3BEF4F204B16B8007B138C /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		0D4FC205204B209000879FEB /* SettingsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingsScene.sks; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				0D5D31952045D25D00222197 /* AppDelegate.swift */,
+				0D26743E210B899F00E8A5E1 /* Extensions.swift */,
 				0D3BEF4D204B1670007B138C /* StartScene.sks */,
 				0D4FC205204B209000879FEB /* SettingsScene.sks */,
 				0D5D31972045D25D00222197 /* GameScene.sks */,
@@ -162,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D5D319C2045D25D00222197 /* GameScene.swift in Sources */,
+				0D26743F210B899F00E8A5E1 /* Extensions.swift in Sources */,
 				0D5D319E2045D25D00222197 /* GameViewController.swift in Sources */,
 				0D5D31962045D25D00222197 /* AppDelegate.swift in Sources */,
 				0DC8F9B4204B24FF00CC8300 /* SettingsScene.swift in Sources */,
