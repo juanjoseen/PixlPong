@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D26743F210B899F00E8A5E1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D26743E210B899F00E8A5E1 /* Extensions.swift */; };
+		0D30B287210E78E600A456F8 /* GameoverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D30B286210E78E600A456F8 /* GameoverScene.sks */; };
 		0D3BEF4E204B1670007B138C /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D3BEF4D204B1670007B138C /* StartScene.sks */; };
 		0D3BEF50204B16B8007B138C /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3BEF4F204B16B8007B138C /* StartScene.swift */; };
 		0D4FC206204B209000879FEB /* SettingsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D4FC205204B209000879FEB /* SettingsScene.sks */; };
@@ -19,9 +21,12 @@
 		0D5D31A32045D25D00222197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D5D31A22045D25D00222197 /* Assets.xcassets */; };
 		0D5D31A62045D25D00222197 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D5D31A42045D25D00222197 /* LaunchScreen.storyboard */; };
 		0DC8F9B4204B24FF00CC8300 /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC8F9B3204B24FF00CC8300 /* SettingsScene.swift */; };
+		0DD23B93210E7DE5005CAD73 /* GameoverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD23B92210E7DE5005CAD73 /* GameoverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D26743E210B899F00E8A5E1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0D30B286210E78E600A456F8 /* GameoverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameoverScene.sks; sourceTree = "<group>"; };
 		0D3BEF4D204B1670007B138C /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
 		0D3BEF4F204B16B8007B138C /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		0D4FC205204B209000879FEB /* SettingsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingsScene.sks; sourceTree = "<group>"; };
@@ -36,6 +41,7 @@
 		0D5D31A52045D25D00222197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D5D31A72045D25D00222197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DC8F9B3204B24FF00CC8300 /* SettingsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
+		0DD23B92210E7DE5005CAD73 /* GameoverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameoverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,13 +75,16 @@
 			isa = PBXGroup;
 			children = (
 				0D5D31952045D25D00222197 /* AppDelegate.swift */,
+				0D26743E210B899F00E8A5E1 /* Extensions.swift */,
 				0D3BEF4D204B1670007B138C /* StartScene.sks */,
 				0D4FC205204B209000879FEB /* SettingsScene.sks */,
 				0D5D31972045D25D00222197 /* GameScene.sks */,
 				0D5D31992045D25D00222197 /* Actions.sks */,
+				0D30B286210E78E600A456F8 /* GameoverScene.sks */,
 				0D3BEF4F204B16B8007B138C /* StartScene.swift */,
 				0DC8F9B3204B24FF00CC8300 /* SettingsScene.swift */,
 				0D5D319B2045D25D00222197 /* GameScene.swift */,
+				0DD23B92210E7DE5005CAD73 /* GameoverScene.swift */,
 				0D5D319D2045D25D00222197 /* GameViewController.swift */,
 				0D5D319F2045D25D00222197 /* Main.storyboard */,
 				0D5D31A22045D25D00222197 /* Assets.xcassets */,
@@ -148,6 +157,7 @@
 				0D5D31982045D25D00222197 /* GameScene.sks in Resources */,
 				0D4FC206204B209000879FEB /* SettingsScene.sks in Resources */,
 				0D5D31A32045D25D00222197 /* Assets.xcassets in Resources */,
+				0D30B287210E78E600A456F8 /* GameoverScene.sks in Resources */,
 				0D3BEF4E204B1670007B138C /* StartScene.sks in Resources */,
 				0D5D31A62045D25D00222197 /* LaunchScreen.storyboard in Resources */,
 				0D5D319A2045D25D00222197 /* Actions.sks in Resources */,
@@ -162,6 +172,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D5D319C2045D25D00222197 /* GameScene.swift in Sources */,
+				0D26743F210B899F00E8A5E1 /* Extensions.swift in Sources */,
+				0DD23B93210E7DE5005CAD73 /* GameoverScene.swift in Sources */,
 				0D5D319E2045D25D00222197 /* GameViewController.swift in Sources */,
 				0D5D31962045D25D00222197 /* AppDelegate.swift in Sources */,
 				0DC8F9B4204B24FF00CC8300 /* SettingsScene.swift in Sources */,

@@ -21,6 +21,9 @@ class StartScene: SKScene {
     var startLbael:SKLabelNode?
     
     override func didMove(to view: SKView) {
+        
+        self.size = CGSize(width: screenWidth, height: screenHeight)
+        
         settingsNode = self.childNode(withName: "settingsNode") as? SKSpriteNode
         startLbael = self.childNode(withName: "startNode") as? SKLabelNode
         startLbael?.fontName = "ChalkboardSE-Regular"

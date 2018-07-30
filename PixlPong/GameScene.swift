@@ -13,6 +13,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let COUNT_DOWN:Int = 3
     
+    var remainingLives:Int = 5
+    
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
@@ -43,6 +45,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
+        
+        self.size = CGSize(width: screenWidth, height: screenHeight)
+        
         // Config labels
         lblCount = self.childNode(withName: "lblCount") as? SKLabelNode
         lblScore = self.childNode(withName: "scoreLabel") as? SKLabelNode
@@ -84,16 +89,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightBar.physicsBody?.categoryBitMask    = paddleCategory
         ballNode.physicsBody?.contactTestBitMask = bottomCategory | paddleCategory
         
+        configBars()
+        
         // Start count down & game
         showCountDown(count: COUNT_DOWN)
         startGame(afterTime: COUNT_DOWN + 1)
         
     }
     
+    func configBars(){
+        if UIDevice.modelName == "iPhone X"{
+            let leftX:CGFloat = 0 - screenWidth/2 + 25
+            leftBar.position = CGPoint(x: leftX, y: leftBar.position.y)
+            
+            let rightX:CGFloat = (screenWidth - rightBar.frame.width)/2
+            rightBar.position = CGPoint(x: rightX, y: rightBar.position.y)
+        }
+    }
+    
     // MARK: - Touches -
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -192,7 +208,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 DispatchQueue.main.async {
                     self.lblCount.text = "\(num)"
                 }
-                
             })
             let before:SKAction = SKAction.group([scaleDown, changeText])
             
@@ -271,5 +286,54 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         showCountDown(count: COUNT_DOWN)
         startGame(afterTime: COUNT_DOWN + 1)
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        var first:SKPhysicsBody
+        var second:SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            first = contact.bodyA
+            second = contact.bodyB
+        } else {
+            first = contact.bodyB
+            second = contact.bodyA
+        }
+        
+        if first.categoryBitMask == ballCategory {
+            switch second.categoryBitMask {
+                case bottomCategory:
+                    if remainingLives > 0 {
+                        remainingLives -= 1
+                        removeHeart(remainingLives)
+                    } else {
+                        score = 0
+                        gameover()
+                    }
+                    break;
+                case paddleCategory:
+                    let dx:CGFloat = (ballNode.physicsBody?.velocity.dx)!
+                    let dy:CGFloat = (ballNode.physicsBody?.velocity.dy)!
+                    score += Double(sqrt(dx*dx + dy*dy) / 100.0)
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+    func removeHeart(_ lives:Int){
+        let name:String = String(format: "heart%d", lives)
+        if let heart:SKSpriteNode = self.childNode(withName: name) as? SKSpriteNode {
+            heart.removeFromParent()
+        }
+    }
+    
+    func gameover(){
+        let transition = SKTransition.fade(withDuration: 1)
+        if let gameScene:SKScene = SKScene(fileNamed: "GameoverScene"){
+            gameScene.scaleMode = .aspectFill
+            self.view?.presentScene(gameScene, transition: transition)
+        }
     }
 }
