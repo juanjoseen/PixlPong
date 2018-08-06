@@ -27,9 +27,9 @@ class GameoverScene: SKScene {
         lblMaxScore = self.childNode(withName: "lblMaxScore") as? SKLabelNode
         lblScore = self.childNode(withName: "lblScore") as? SKLabelNode
         
-        lblGameover?.fontName = "ChalkboardSE-Regular"
-        lblMaxScore?.fontName = "ChalkboardSE-Regular"
-        lblScore?.fontName = "ChalkboardSE-Regular"
+        lblGameover?.fontName = "8BITWONDERNominal"
+        lblMaxScore?.fontName = "8BITWONDERNominal"
+        lblScore?.fontName = "8BITWONDERNominal"
         
         homeNode = self.childNode(withName: "btnHome") as? SKSpriteNode
         

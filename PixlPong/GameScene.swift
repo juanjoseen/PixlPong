@@ -51,7 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Config labels
         lblCount = self.childNode(withName: "lblCount") as? SKLabelNode
         lblScore = self.childNode(withName: "scoreLabel") as? SKLabelNode
-        lblScore.fontName = "ChalkboardSE-Regular"
+        lblScore.fontName = "8BITWONDERNominal"
         score = 0
         
         // Config world
