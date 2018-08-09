@@ -37,6 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score:Double = 0 {
         didSet{
             lblScore.text = "Score: \(Int(score))"
+            GlobalData.shared.localScore = score
         }
     }
     
@@ -89,6 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightBar.physicsBody?.categoryBitMask    = paddleCategory
         ballNode.physicsBody?.contactTestBitMask = bottomCategory | paddleCategory
         
+        configBall()
         configBars()
         
         // Start count down & game
@@ -97,13 +99,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func configBars(){
+    private func configBall(){
+        if GlobalData.shared.useBallTextures {
+            // TODO: implement texture in ball node
+            let textureName:String = GlobalData.shared.ballTexture
+        } else {
+            let sColor:String = GlobalData.shared.ballColor
+            let color:UIColor = UIColor.hexColor(sColor)
+            ballNode.color = color
+        }
+    }
+    
+    private func configBars(){
         if UIDevice.modelName == "iPhone X"{
             let leftX:CGFloat = 0 - screenWidth/2 + 25
             leftBar.position = CGPoint(x: leftX, y: leftBar.position.y)
             
             let rightX:CGFloat = (screenWidth - rightBar.frame.width)/2
             rightBar.position = CGPoint(x: rightX, y: rightBar.position.y)
+        }
+        
+        if GlobalData.shared.useBarTextures {
+            // TODO: implement texture in bar nodes
+            let textureName:String = GlobalData.shared.barTexture
+        } else {
+            let sColor:String = GlobalData.shared.barColor
+            let color:UIColor = UIColor.hexColor(sColor)
+            
+            rightBar.color = color
+            leftBar.color = color
+            downBar.color = color
+            upBar.color = color
         }
     }
     
@@ -307,7 +333,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         remainingLives -= 1
                         removeHeart(remainingLives)
                     } else {
-                        score = 0
+                        GlobalData.shared.maxScore = score
                         gameover()
                     }
                     break;
@@ -330,6 +356,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameover(){
+        
+        // Change scene
         let transition = SKTransition.fade(withDuration: 1)
         if let gameScene:SKScene = SKScene(fileNamed: "GameoverScene"){
             gameScene.scaleMode = .aspectFill

@@ -35,6 +35,9 @@ class GameoverScene: SKScene {
         
         startScene = SKScene(fileNamed: "StartScene")
         startScene.scaleMode = .aspectFill
+        
+        lblScore?.text = "Puntuación: \(Int(GlobalData.shared.localScore))"
+        lblMaxScore?.text = "Puntuación Máxima: \(Int(GlobalData.shared.maxScore))"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

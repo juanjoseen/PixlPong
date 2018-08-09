@@ -50,7 +50,7 @@ class SettingsScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches began")
+//        print("touches began")
         if let touch = touches.first {
             let pos = touch.location(in: self)
             let node = self.atPoint(pos)
