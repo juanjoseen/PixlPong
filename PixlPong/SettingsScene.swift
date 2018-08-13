@@ -13,6 +13,7 @@ class SettingsScene: SKScene {
     
     // MARK: - Scenes -
     var startScene:SKScene!
+    weak var settingsSceneTexture:SKScene!
     
     // MARK: - Nodes -
     var btnCancel:SKSpriteNode?
@@ -21,6 +22,7 @@ class SettingsScene: SKScene {
     var lblSave:SKLabelNode?
     weak var lblSound:SKLabelNode?
     weak var lblQuit:SKLabelNode?
+    weak var lblTextures:SKLabelNode?
     
     // MARK: - Methods -
     override func didMove(to view: SKView) {
@@ -33,6 +35,7 @@ class SettingsScene: SKScene {
         lblSave = btnSave?.childNode(withName: "lblSave") as? SKLabelNode
         lblSound = self.childNode(withName: "lblSound") as? SKLabelNode
         lblQuit = self.childNode(withName: "lblQuit") as? SKLabelNode
+        lblTextures = self.childNode(withName: "lblTextures") as? SKLabelNode
 
         btnCancel?.color = .clear
         btnSave?.color = .clear
@@ -42,11 +45,14 @@ class SettingsScene: SKScene {
 
         lblSound?.fontName = "8BITWONDERNominal"
         lblQuit?.fontName = "8BITWONDERNominal"
+
+        lblTextures?.fontName = "8BITWONDERNominal"
         
         lblCancel?.text = "cancel"
         lblSave?.text = "save"
         lblSound?.text = "sound: on"
         lblQuit?.text = "quit game"
+        lblTextures?.text = "textures"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -67,6 +73,9 @@ class SettingsScene: SKScene {
                 // ToDo save settings
                 returnToStart()
             }
+            else if node == lblTextures{
+                gotoTexturesScene()
+            }
         }
     }
     
@@ -82,5 +91,12 @@ class SettingsScene: SKScene {
     
     func saveSettings(){
         
+    }
+
+    func gotoTexturesScene(){
+        let transition = SKTransition.fade(withDuration: 1)
+        settingsSceneTexture = SKScene(fileNamed: "SettingsTexturesScene")
+        settingsSceneTexture.scaleMode = .aspectFill
+        self.view?.presentScene(settingsSceneTexture, transition: transition)
     }
 }
