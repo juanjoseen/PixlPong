@@ -38,6 +38,9 @@ class GameoverScene: SKScene {
         
         lblScore?.text = "Puntuación: \(Int(GlobalData.shared.localScore))"
         lblMaxScore?.text = "Puntuación Máxima: \(Int(GlobalData.shared.maxScore))"
+        
+        let gameoverSound:SKAction = SKAction.playSoundFileNamed("fail.m4a", waitForCompletion: false)
+        play(sound: gameoverSound)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

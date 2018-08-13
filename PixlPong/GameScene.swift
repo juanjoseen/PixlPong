@@ -34,6 +34,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var leftBar:SKSpriteNode!
     var rightBar:SKSpriteNode!
     
+    let bitSound:SKAction = SKAction.playSoundFileNamed("bit.wav", waitForCompletion: false)
+    
     var score:Double = 0 {
         didSet{
             lblScore.text = "Score: \(Int(score))"
@@ -103,6 +105,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if GlobalData.shared.useBallTextures {
             // TODO: implement texture in ball node
             let textureName:String = GlobalData.shared.ballTexture
+            let texture:SKTexture = SKTexture(imageNamed: textureName)
+            ballNode.texture = texture
         } else {
             let sColor:String = GlobalData.shared.ballColor
             let color:UIColor = UIColor.hexColor(sColor)
@@ -122,6 +126,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if GlobalData.shared.useBarTextures {
             // TODO: implement texture in bar nodes
             let textureName:String = GlobalData.shared.barTexture
+            let texture:SKTexture = SKTexture(imageNamed: textureName)
+            
+            rightBar.texture = texture
+            leftBar.texture = texture
+            downBar.texture = texture
+            upBar.texture = texture
+            
         } else {
             let sColor:String = GlobalData.shared.barColor
             let color:UIColor = UIColor.hexColor(sColor)
@@ -341,6 +352,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let dx:CGFloat = (ballNode.physicsBody?.velocity.dx)!
                     let dy:CGFloat = (ballNode.physicsBody?.velocity.dy)!
                     score += Double(sqrt(dx*dx + dy*dy) / 100.0)
+                    play(sound: bitSound)
                     break;
                 default:
                     break;
