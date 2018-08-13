@@ -20,6 +20,10 @@ extension SKScene {
             return UIScreen.main.bounds.height
         }
     }
+    
+    func play(sound:SKAction){
+        run(sound)
+    }
 }
 
 extension UIDevice {
