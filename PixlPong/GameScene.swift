@@ -94,6 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         configBall()
         configBars()
+        configHearts()
         
         // Start count down & game
         showCountDown(count: COUNT_DOWN)
@@ -115,13 +116,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func configBars(){
-        if UIDevice.modelName == "iPhone X"{
-            let leftX:CGFloat = 0 - screenWidth/2 + 25
-            leftBar.position = CGPoint(x: leftX, y: leftBar.position.y)
-            
-            let rightX:CGFloat = (screenWidth - rightBar.frame.width)/2
-            rightBar.position = CGPoint(x: rightX, y: rightBar.position.y)
-        }
+//        if UIDevice.modelName == "iPhone X"{
+        let leftX:CGFloat = 0 - screenWidth/2 + 25
+        leftBar.position = CGPoint(x: leftX, y: leftBar.position.y)
+        
+        let rightX:CGFloat = (screenWidth - rightBar.frame.width)/2
+        rightBar.position = CGPoint(x: rightX, y: rightBar.position.y)
+        
+        let upY:CGFloat = (screenHeight - upBar.frame.height)/2
+        upBar.position = CGPoint(x: upBar.position.x, y: upY)
+        
+        let downY:CGFloat = 0 - screenHeight/2 + 25
+        downBar.position = CGPoint(x: downBar.position.x, y: downY)
+        
+//        }
         
         if GlobalData.shared.useBarTextures {
             // TODO: implement texture in bar nodes
@@ -374,6 +382,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let gameScene:SKScene = SKScene(fileNamed: "GameoverScene"){
             gameScene.scaleMode = .aspectFill
             self.view?.presentScene(gameScene, transition: transition)
+        }
+    }
+    
+    func configHearts(){
+        for i in 0...remainingLives {
+            let name:String = String(format: "heart%d", i)
+            if let heart:SKSpriteNode = self.childNode(withName: name) as? SKSpriteNode {
+                let upY:CGFloat = (screenHeight - heart.frame.height)/2 - 25
+                heart.position = CGPoint(x: heart.position.x, y: upY)
+            }
         }
     }
 }
