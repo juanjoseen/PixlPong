@@ -19,6 +19,8 @@ class StartScene: SKScene {
     
     var settingsNode:SKSpriteNode?
     var startLbael:SKLabelNode?
+
+    weak var titleNode:SKLabelNode?
     
     override func didMove(to view: SKView) {
         
@@ -26,7 +28,10 @@ class StartScene: SKScene {
         
         settingsNode = self.childNode(withName: "settingsNode") as? SKSpriteNode
         startLbael = self.childNode(withName: "startNode") as? SKLabelNode
-        startLbael?.fontName = "ChalkboardSE-Regular"
+        titleNode = self.childNode(withName: "titleNode") as? SKLabelNode
+
+        startLbael?.fontName = "8BITWONDERNominal"
+        titleNode?.fontName = "8BITWONDERNominal"
         
 //        print("Fonts....")
 //        for family in UIFont.familyNames.sorted() {
