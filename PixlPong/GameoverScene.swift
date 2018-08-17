@@ -27,17 +27,17 @@ class GameoverScene: SKScene {
         lblMaxScore = self.childNode(withName: "lblMaxScore") as? SKLabelNode
         lblScore = self.childNode(withName: "lblScore") as? SKLabelNode
         
-        lblGameover?.fontName = "ChalkboardSE-Regular"
-        lblMaxScore?.fontName = "ChalkboardSE-Regular"
-        lblScore?.fontName = "ChalkboardSE-Regular"
+        lblGameover?.fontName = "8BITWONDERNominal"
+        lblMaxScore?.fontName = "8BITWONDERNominal"
+        lblScore?.fontName = "8BITWONDERNominal"
         
         homeNode = self.childNode(withName: "btnHome") as? SKSpriteNode
         
         startScene = SKScene(fileNamed: "StartScene")
         startScene.scaleMode = .aspectFill
         
-        lblScore?.text = "Puntuación: \(Int(GlobalData.shared.localScore))"
-        lblMaxScore?.text = "Puntuación Máxima: \(Int(GlobalData.shared.maxScore))"
+        lblScore?.text = "Score: \(Int(GlobalData.shared.localScore))"
+        lblMaxScore?.text = "Max Score: \(Int(GlobalData.shared.maxScore))"
         
         let gameoverSound:SKAction = SKAction.playSoundFileNamed("fail.m4a", waitForCompletion: false)
         play(sound: gameoverSound)
