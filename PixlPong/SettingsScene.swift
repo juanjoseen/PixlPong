@@ -16,8 +16,6 @@ class SettingsScene: SKScene {
     weak var settingsSceneTexture:SKScene!
     
     // MARK: - Nodes -
-    var btnCancel:SKSpriteNode?
-    var btnSave:SKSpriteNode?
     var lblCancel:SKLabelNode?
     var lblSave:SKLabelNode?
     weak var lblSound:SKLabelNode?
@@ -28,17 +26,12 @@ class SettingsScene: SKScene {
     override func didMove(to view: SKView) {
         
         self.size = CGSize(width: screenWidth, height: screenHeight)
-        
-        btnCancel = self.childNode(withName: "btnCancel") as? SKSpriteNode
-        btnSave = self.childNode(withName: "btnSave") as? SKSpriteNode
-        lblCancel = btnCancel?.childNode(withName: "lblCancel") as? SKLabelNode
-        lblSave = btnSave?.childNode(withName: "lblSave") as? SKLabelNode
+
+        lblCancel = self.childNode(withName: "lblCancel") as? SKLabelNode
+        lblSave = self.childNode(withName: "lblSave") as? SKLabelNode
         lblSound = self.childNode(withName: "lblSound") as? SKLabelNode
         lblQuit = self.childNode(withName: "lblQuit") as? SKLabelNode
         lblTextures = self.childNode(withName: "lblTextures") as? SKLabelNode
-
-        btnCancel?.color = .clear
-        btnSave?.color = .clear
         
         lblSave?.fontName = "8BITWONDERNominal"
         lblCancel?.fontName = "8BITWONDERNominal"
@@ -56,19 +49,18 @@ class SettingsScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("touches began")
         if let touch = touches.first {
             let pos = touch.location(in: self)
             let node = self.atPoint(pos)
             
-            if node == btnCancel || node == lblCancel || node == lblQuit{
+            if node == lblCancel || node == lblQuit{
                 print("Cancel touched")
                 returnToStart()
             }
             else if node == lblSound{
                 print("lbl Sound selected, deactivate all sounds")
             }
-            else if node == btnSave || node == lblSave {
+            else if node == lblSave {
                 print("Save touched")
                 // ToDo save settings
                 returnToStart()

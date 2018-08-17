@@ -36,8 +36,8 @@ class GameoverScene: SKScene {
         startScene = SKScene(fileNamed: "StartScene")
         startScene.scaleMode = .aspectFill
         
-        lblScore?.text = "Puntuación: \(Int(GlobalData.shared.localScore))"
-        lblMaxScore?.text = "Puntuación Máxima: \(Int(GlobalData.shared.maxScore))"
+        lblScore?.text = "Score: \(Int(GlobalData.shared.localScore))"
+        lblMaxScore?.text = "Max Score: \(Int(GlobalData.shared.maxScore))"
         
         let gameoverSound:SKAction = SKAction.playSoundFileNamed("fail.m4a", waitForCompletion: false)
         play(sound: gameoverSound)
