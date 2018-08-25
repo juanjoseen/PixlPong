@@ -33,13 +33,13 @@ class SettingsScene: SKScene {
         lblQuit = self.childNode(withName: "lblQuit") as? SKLabelNode
         lblTextures = self.childNode(withName: "lblTextures") as? SKLabelNode
         
-        lblSave?.fontName = "8BITWONDERNominal"
-        lblCancel?.fontName = "8BITWONDERNominal"
+        lblSave?.fontName = GlobalData.shared.fontName
+        lblCancel?.fontName = GlobalData.shared.fontName
 
-        lblSound?.fontName = "8BITWONDERNominal"
-        lblQuit?.fontName = "8BITWONDERNominal"
+        lblSound?.fontName = GlobalData.shared.fontName
+        lblQuit?.fontName = GlobalData.shared.fontName
 
-        lblTextures?.fontName = "8BITWONDERNominal"
+        lblTextures?.fontName = GlobalData.shared.fontName
         
         lblCancel?.text = "cancel"
         lblSave?.text = "save"
@@ -62,7 +62,7 @@ class SettingsScene: SKScene {
             }
             else if node == lblSave {
                 print("Save touched")
-                // ToDo save settings
+                // TODO: save settings
                 returnToStart()
             }
             else if node == lblTextures{

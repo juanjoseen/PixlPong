@@ -30,15 +30,10 @@ class StartScene: SKScene {
         startLbael = self.childNode(withName: "startNode") as? SKLabelNode
         titleNode = self.childNode(withName: "titleNode") as? SKLabelNode
 
-        startLbael?.fontName = "8BITWONDERNominal"
-        titleNode?.fontName = "8BITWONDERNominal"
+        startLbael?.fontName = GlobalData.shared.fontName
+        titleNode?.fontName = GlobalData.shared.fontName
         
-//        print("Fonts....")
-//        for family in UIFont.familyNames.sorted() {
-//            for name in UIFont.fontNames(forFamilyName: family) {
-//                print(name)
-//            }
-//        }
+        configSettings()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -58,5 +53,12 @@ class StartScene: SKScene {
                 self.view?.presentScene(gameScene, transition: transition)
             }
         }
+    }
+    
+    func configSettings(){
+        let upY:CGFloat = (screenHeight - settingsNode!.frame.height)/2 - 25
+        let rightX:CGFloat = (screenWidth - settingsNode!.frame.width)/2 - 25
+        
+        settingsNode?.position = CGPoint(x: rightX, y: upY)
     }
 }
