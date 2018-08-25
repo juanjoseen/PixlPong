@@ -15,9 +15,11 @@ class GameoverScene: SKScene {
     var lblMaxScore:SKLabelNode?
     var lblScore:SKLabelNode?
     
-    var homeNode:SKSpriteNode?
+    var homeNode:SKLabelNode?
+    var retryNode:SKLabelNode?
     
     var startScene:SKScene!
+    var gameScene:SKScene!
     
     override func didMove(to view: SKView) {
         
@@ -25,18 +27,26 @@ class GameoverScene: SKScene {
         
         lblGameover = self.childNode(withName: "lblGameover") as? SKLabelNode
         lblMaxScore = self.childNode(withName: "lblMaxScore") as? SKLabelNode
-        lblScore = self.childNode(withName: "lblScore") as? SKLabelNode
+        lblScore    = self.childNode(withName: "lblScore") as? SKLabelNode
         
-        lblGameover?.fontName = "8BITWONDERNominal"
-        lblMaxScore?.fontName = "8BITWONDERNominal"
-        lblScore?.fontName = "8BITWONDERNominal"
+        homeNode  = self.childNode(withName: "btnHome") as? SKLabelNode
+        retryNode = self.childNode(withName: "btnRetry") as? SKLabelNode
         
-        homeNode = self.childNode(withName: "btnHome") as? SKSpriteNode
+        lblGameover?.fontName = GlobalData.shared.fontName
+        lblMaxScore?.fontName = GlobalData.shared.fontName
+        lblScore?.fontName    = GlobalData.shared.fontName
+        
+        homeNode?.fontName  = GlobalData.shared.fontName
+        retryNode?.fontName = GlobalData.shared.fontName
+        
         
         startScene = SKScene(fileNamed: "StartScene")
         startScene.scaleMode = .aspectFill
         
-        lblScore?.text = "Score: \(Int(GlobalData.shared.localScore))"
+        gameScene = SKScene(fileNamed: "GameScene")
+        gameScene.scaleMode = .aspectFill
+        
+        lblScore?.text    = "Score: \(Int(GlobalData.shared.localScore))"
         lblMaxScore?.text = "Max Score: \(Int(GlobalData.shared.maxScore))"
         
         let gameoverSound:SKAction = SKAction.playSoundFileNamed("fail.m4a", waitForCompletion: false)
@@ -51,6 +61,9 @@ class GameoverScene: SKScene {
             if node == homeNode {
                 let transition = SKTransition.fade(withDuration: 1)
                 self.view?.presentScene(startScene, transition: transition)
+            } else if node == retryNode {
+                let transition = SKTransition.fade(withDuration: 1)
+                self.view?.presentScene(gameScene, transition: transition)
             }
         }
     }

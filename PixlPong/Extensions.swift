@@ -8,6 +8,7 @@
 
 import SpriteKit
 
+// MARK: -
 extension SKScene {
     var screenWidth:CGFloat {
         get {
@@ -26,6 +27,7 @@ extension SKScene {
     }
 }
 
+// MARK: -
 extension UIDevice {
     
     static let modelName: String = {
@@ -92,6 +94,7 @@ extension UIDevice {
     }()
 }
 
+// MARK: -
 extension UIColor {
     class func hexColor(_ hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
