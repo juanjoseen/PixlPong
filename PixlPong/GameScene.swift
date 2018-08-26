@@ -13,7 +13,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let COUNT_DOWN:Int = 3
     
-    var remainingLives:Int = 5
+    var remainingLives:Int = 5 {
+        didSet {
+            lblLifes.text = String(format: "%d x", remainingLives)
+        }
+    }
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -28,6 +32,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var lblCount:SKLabelNode!
     var lblScore:SKLabelNode!
+    var lblLifes:SKLabelNode!
+    var heartNode:SKSpriteNode!
     var ballNode:SKSpriteNode!
     var upBar:SKSpriteNode!
     var downBar:SKSpriteNode!
@@ -54,7 +60,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Config labels
         lblCount = self.childNode(withName: "lblCount") as? SKLabelNode
         lblScore = self.childNode(withName: "scoreLabel") as? SKLabelNode
-        lblScore.fontName = "8BITWONDERNominal"
+        lblLifes = self.childNode(withName: "lblLifes") as? SKLabelNode
+        lblScore.fontName = GlobalData.shared.fontName
+        lblLifes.fontName = GlobalData.shared.fontName
+        
         score = 0
         
         // Config world
@@ -92,8 +101,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightBar.physicsBody?.categoryBitMask    = paddleCategory
         ballNode.physicsBody?.contactTestBitMask = bottomCategory | paddleCategory
         
+        // Configs
+        heartNode = self.childNode(withName: "heart") as? SKSpriteNode
+        configHearts()
         configBall()
         configBars()
+        configScore()
         
         // Start count down & game
         showCountDown(count: COUNT_DOWN)
@@ -115,13 +128,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func configBars(){
-        if UIDevice.modelName == "iPhone X"{
-            let leftX:CGFloat = 0 - screenWidth/2 + 25
-            leftBar.position = CGPoint(x: leftX, y: leftBar.position.y)
-            
-            let rightX:CGFloat = (screenWidth - rightBar.frame.width)/2
-            rightBar.position = CGPoint(x: rightX, y: rightBar.position.y)
-        }
+        
+        let leftX:CGFloat = 0 - screenWidth/2 + 25
+        leftBar.position = CGPoint(x: leftX, y: leftBar.position.y)
+        
+        let rightX:CGFloat = (screenWidth - rightBar.frame.width)/2
+        rightBar.position = CGPoint(x: rightX, y: rightBar.position.y)
+        
+        let upY:CGFloat = (screenHeight - upBar.frame.height)/2
+        upBar.position = CGPoint(x: upBar.position.x, y: upY)
+        
+        let downY:CGFloat = 0 - screenHeight/2 + 25
+        downBar.position = CGPoint(x: downBar.position.x, y: downY)
+        
         
         if GlobalData.shared.useBarTextures {
             // TODO: implement texture in bar nodes
@@ -142,6 +161,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             downBar.color = color
             upBar.color = color
         }
+    }
+    
+    func configHearts(){
+        let rightX:CGFloat = (screenWidth - heartNode.frame.width)/2 - 25
+        let leftX:CGFloat = rightX - (heartNode.size.width + 25)
+        let upY:CGFloat = (screenHeight - heartNode.frame.height)/2 - 25
+        
+        heartNode.position = CGPoint(x: rightX, y: upY)
+        
+        lblLifes.position = CGPoint(x: leftX, y: upY - 10)
+    }
+    
+    func configScore(){
+        let leftX:CGFloat = 0 - screenWidth/2 + 25
+        let downY:CGFloat = 0 - screenHeight/2 + 25
+        
+        lblScore.position = CGPoint(x: leftX, y: downY)
+        
     }
     
     // MARK: - Touches -

@@ -40,9 +40,9 @@ class SettingsTexturesScene: SKScene{
         ballTexture = self.childNode(withName: "barTexture") as? SKLabelNode
         backButton = self.childNode(withName: "backButton") as? SKLabelNode
 
-        barTexture?.fontName = "8BITWONDERNominal"
-        ballTexture?.fontName = "8BITWONDERNominal"
-        backButton?.fontName = "8BITWONDERNominal"
+        barTexture?.fontName = GlobalData.shared.fontName
+        ballTexture?.fontName = GlobalData.shared.fontName
+        backButton?.fontName = GlobalData.shared.fontName
 
         sknWoodTextureBar = self.childNode(withName: "sknWoodTexture") as? SKSpriteNode
         sknRWoodTextureBar = self.childNode(withName: "sknRWoodTexture") as? SKSpriteNode

@@ -87,4 +87,11 @@ class GlobalData {
         }
     }
     
+    // MARK: - Fonts -
+    var fontName:String {
+        get {
+            return "8BITWONDERNominal"
+        }
+    }
+    
 }
