@@ -11,7 +11,6 @@ import GameplayKit
 
 class SettingsTexturesScene: SKScene{
     var sknWoodTextureBar:SKSpriteNode?
-    var sknAsphaltTextureBar:SKSpriteNode?
     var sknRWoodTextureBar:SKSpriteNode?
     var sknBrushedMetalTextureBar:SKSpriteNode?
     var sknChessTextureBar:SKSpriteNode?
@@ -46,7 +45,6 @@ class SettingsTexturesScene: SKScene{
         backButton?.fontName = "8BITWONDERNominal"
 
         sknWoodTextureBar = self.childNode(withName: "sknWoodTexture") as? SKSpriteNode
-        sknAsphaltTextureBar = self.childNode(withName: "sknAsphaltTexture") as? SKSpriteNode
         sknRWoodTextureBar = self.childNode(withName: "sknRWoodTexture") as? SKSpriteNode
         sknBrushedMetalTextureBar = self.childNode(withName: "sknBrushedMetalTexture") as? SKSpriteNode
         sknChessTextureBar = self.childNode(withName: "sknChessTexture") as? SKSpriteNode
@@ -54,7 +52,6 @@ class SettingsTexturesScene: SKScene{
         sknVintageClayTextureBar = self.childNode(withName: "sknVintageClayTexture") as? SKSpriteNode
 
         sknWoodTextureBall = self.childNode(withName: "sknWoodTexture") as? SKSpriteNode
-        sknAsphaltTextureBall = self.childNode(withName: "sknAsphaltTexture") as? SKSpriteNode
         sknRWoodTextureBall = self.childNode(withName: "sknRWoodTexture") as? SKSpriteNode
         sknBrushedMetalTextureBall = self.childNode(withName: "sknBrushedMetalTexture") as? SKSpriteNode
         sknChessTextureBall = self.childNode(withName: "sknChessTexture") as? SKSpriteNode
