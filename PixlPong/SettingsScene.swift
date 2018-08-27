@@ -35,10 +35,8 @@ class SettingsScene: SKScene {
         
         lblSave?.fontName = GlobalData.shared.fontName
         lblCancel?.fontName = GlobalData.shared.fontName
-
         lblSound?.fontName = GlobalData.shared.fontName
         lblQuit?.fontName = GlobalData.shared.fontName
-
         lblTextures?.fontName = GlobalData.shared.fontName
         
         lblCancel?.text = "cancel"

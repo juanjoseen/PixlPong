@@ -16,13 +16,8 @@ class SettingsTexturesScene: SKScene{
     var sknChessTextureBar:SKSpriteNode?
     var sknConcretTextureBar:SKSpriteNode?
     var sknVintageClayTextureBar:SKSpriteNode?
-    var sknWoodTextureBall:SKSpriteNode?
-    var sknAsphaltTextureBall:SKSpriteNode?
-    var sknRWoodTextureBall:SKSpriteNode?
-    var sknBrushedMetalTextureBall:SKSpriteNode?
+    var sknHypTextureBall:SKSpriteNode?
     var sknChessTextureBall:SKSpriteNode?
-    var sknConcretTextureBall:SKSpriteNode?
-    var sknVintageClayTextureBall:SKSpriteNode?
     var actionAppear:SKAction = SKAction.fadeAlpha(by: 1, duration: 0.1)
     var actionDisappear:SKAction = SKAction.fadeAlpha(by: 0, duration: 0.1)
 
@@ -37,7 +32,7 @@ class SettingsTexturesScene: SKScene{
         self.size = CGSize(width: screenWidth, height: screenHeight)
 
         barTexture = self.childNode(withName: "barTexture") as? SKLabelNode
-        ballTexture = self.childNode(withName: "barTexture") as? SKLabelNode
+        ballTexture = self.childNode(withName: "ballTexture") as? SKLabelNode
         backButton = self.childNode(withName: "backButton") as? SKLabelNode
 
         barTexture?.fontName = GlobalData.shared.fontName
@@ -51,12 +46,8 @@ class SettingsTexturesScene: SKScene{
         sknConcretTextureBar = self.childNode(withName: "sknConcretTexture") as? SKSpriteNode
         sknVintageClayTextureBar = self.childNode(withName: "sknVintageClayTexture") as? SKSpriteNode
 
-        sknWoodTextureBall = self.childNode(withName: "sknWoodTexture") as? SKSpriteNode
-        sknRWoodTextureBall = self.childNode(withName: "sknRWoodTexture") as? SKSpriteNode
-        sknBrushedMetalTextureBall = self.childNode(withName: "sknBrushedMetalTexture") as? SKSpriteNode
-        sknChessTextureBall = self.childNode(withName: "sknChessTexture") as? SKSpriteNode
-        sknConcretTextureBall = self.childNode(withName: "sknConcretTexture") as? SKSpriteNode
-        sknVintageClayTextureBall = self.childNode(withName: "sknVintageClayTexture") as? SKSpriteNode
+        sknHypTextureBall = self.childNode(withName: "sknHypTextureBall") as? SKSpriteNode
+        sknChessTextureBall = self.childNode(withName: "sknChessTextureBall") as? SKSpriteNode
 
         selectedNodeBar = self.childNode(withName: "selectedNodeBar") as? SKSpriteNode
         selectedNodeBar?.alpha = 0.0
