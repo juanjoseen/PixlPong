@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "sknRWoodTextureBar.jpeg",
+      "filename" : "sknRWoodTextureBar.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "sknRWoodTextureBar@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "sknRWoodTextureBar@3x.png",
       "scale" : "3x"
     }
   ],
