@@ -118,7 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if GlobalData.shared.useBallTextures {
             // TODO: implement texture in ball node
             let textureName:String = GlobalData.shared.ballTexture
-            let texture:SKTexture = SKTexture(imageNamed: textureName)
+            let texture:SKTexture = SKTexture(image: UIImage(named: textureName)!.circleMasked!)
             ballNode.texture = texture
         } else {
             let sColor:String = GlobalData.shared.ballColor

@@ -49,6 +49,9 @@ class SettingsTexturesScene: SKScene{
         sknHypTextureBall = self.childNode(withName: "sknHypTextureBall") as? SKSpriteNode
         sknChessTextureBall = self.childNode(withName: "sknChessTextureBall") as? SKSpriteNode
 
+        sknHypTextureBall?.texture = SKTexture(image: UIImage(named: "sknHypTextureBall")!.circleMasked!)
+        sknChessTextureBall?.texture = SKTexture(image: UIImage(named: "sknChessTextureBall")!.circleMasked!)
+
         selectedNodeBar = self.childNode(withName: "selectedNodeBar") as? SKSpriteNode
         selectedNodeBar?.alpha = 0.0
         selectedNodeBall = self.childNode(withName: "selectedNodeBall") as? SKSpriteNode
