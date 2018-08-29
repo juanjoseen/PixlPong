@@ -21,6 +21,8 @@
 		0D5D31A12045D25D00222197 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D5D319F2045D25D00222197 /* Main.storyboard */; };
 		0D5D31A32045D25D00222197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D5D31A22045D25D00222197 /* Assets.xcassets */; };
 		0D5D31A62045D25D00222197 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D5D31A42045D25D00222197 /* LaunchScreen.storyboard */; };
+		0DAC07DA2137299A00EFBF32 /* SettingsColorScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0DAC07D92137299A00EFBF32 /* SettingsColorScene.sks */; };
+		0DAC07DC21372A8700EFBF32 /* SettingsColorScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAC07DB21372A8700EFBF32 /* SettingsColorScene.swift */; };
 		0DC8F9B4204B24FF00CC8300 /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC8F9B3204B24FF00CC8300 /* SettingsScene.swift */; };
 		0DD23B93210E7DE5005CAD73 /* GameoverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD23B92210E7DE5005CAD73 /* GameoverScene.swift */; };
 		B20DFFB6211D0B780017AEC1 /* bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = B20DFFB3211D0B780017AEC1 /* bit.wav */; };
@@ -48,6 +50,8 @@
 		0D5D31A22045D25D00222197 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D5D31A52045D25D00222197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D5D31A72045D25D00222197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DAC07D92137299A00EFBF32 /* SettingsColorScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingsColorScene.sks; sourceTree = "<group>"; };
+		0DAC07DB21372A8700EFBF32 /* SettingsColorScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsColorScene.swift; sourceTree = "<group>"; };
 		0DC8F9B3204B24FF00CC8300 /* SettingsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
 		0DD23B92210E7DE5005CAD73 /* GameoverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameoverScene.swift; sourceTree = "<group>"; };
 		B20DFFB3211D0B780017AEC1 /* bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bit.wav; sourceTree = "<group>"; };
@@ -96,12 +100,14 @@
 				0D3BEF4D204B1670007B138C /* StartScene.sks */,
 				0D4FC205204B209000879FEB /* SettingsScene.sks */,
 				B212300F2121F4EA00013162 /* SettingsTexturesScene.sks */,
+				0DAC07D92137299A00EFBF32 /* SettingsColorScene.sks */,
 				0D5D31972045D25D00222197 /* GameScene.sks */,
 				0D5D31992045D25D00222197 /* Actions.sks */,
 				0D30B286210E78E600A456F8 /* GameoverScene.sks */,
 				0D3BEF4F204B16B8007B138C /* StartScene.swift */,
 				0DC8F9B3204B24FF00CC8300 /* SettingsScene.swift */,
 				B21230112121F5F900013162 /* SettingsTexturesScene.swift */,
+				0DAC07DB21372A8700EFBF32 /* SettingsColorScene.swift */,
 				0D5D319B2045D25D00222197 /* GameScene.swift */,
 				0DD23B92210E7DE5005CAD73 /* GameoverScene.swift */,
 				0D5D319D2045D25D00222197 /* GameViewController.swift */,
@@ -199,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D5D31A12045D25D00222197 /* Main.storyboard in Resources */,
+				0DAC07DA2137299A00EFBF32 /* SettingsColorScene.sks in Resources */,
 				0D5D31982045D25D00222197 /* GameScene.sks in Resources */,
 				B21479FE2118E12C00C47302 /* 8-BIT-WONDER.ttf in Resources */,
 				0D4FC206204B209000879FEB /* SettingsScene.sks in Resources */,
@@ -222,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D5D319C2045D25D00222197 /* GameScene.swift in Sources */,
+				0DAC07DC21372A8700EFBF32 /* SettingsColorScene.swift in Sources */,
 				0D26743F210B899F00E8A5E1 /* Extensions.swift in Sources */,
 				0DD23B93210E7DE5005CAD73 /* GameoverScene.swift in Sources */,
 				0D5D319E2045D25D00222197 /* GameViewController.swift in Sources */,

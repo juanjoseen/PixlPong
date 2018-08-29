@@ -42,6 +42,7 @@ class StartScene: SKScene {
             let node = self.atPoint(pos)
             
             if node == settingsNode {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 let transition = SKTransition.fade(withDuration: 1)
                 settingsScene = SKScene(fileNamed: "SettingsScene")
                 settingsScene.scaleMode = .aspectFill

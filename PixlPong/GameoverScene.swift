@@ -59,9 +59,11 @@ class GameoverScene: SKScene {
             let node = self.atPoint(pos)
             
             if node == homeNode {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 let transition = SKTransition.fade(withDuration: 1)
                 self.view?.presentScene(startScene, transition: transition)
             } else if node == retryNode {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 let transition = SKTransition.fade(withDuration: 1)
                 self.view?.presentScene(gameScene, transition: transition)
             }

@@ -62,7 +62,7 @@ class SettingsTexturesScene: SKScene{
         if let touch = touches.first {
             let pos = touch.location(in: self)
             let node = self.atPoint(pos)
-            let secuence:SKAction = SKAction.sequence([actionAppear,actionDisappear, actionAppear, actionDisappear, actionAppear])
+            let secuence:SKAction = SKAction.sequence([actionAppear, actionDisappear, actionAppear, actionDisappear, actionAppear])
 
             if let tmpNode:SKSpriteNode = node as? SKSpriteNode{
                 if (tmpNode.name?.lowercased().contains("bar"))!{
@@ -70,17 +70,20 @@ class SettingsTexturesScene: SKScene{
                     GlobalData.shared.useBarTextures = true
                     selectedNodeBar?.position = tmpNode.position
                     selectedNodeBar?.run(secuence)
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 }
                 else{
                     GlobalData.shared.ballTexture = (tmpNode.name)!
                     GlobalData.shared.useBallTextures = true
                     selectedNodeBall?.position = tmpNode.position
                     selectedNodeBall?.run(secuence)
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 }
             }
             else{
                 switch node.name{
                 case backButton?.name:
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     returnToStart()
                     break
 
@@ -91,7 +94,6 @@ class SettingsTexturesScene: SKScene{
     }
 
     func returnToStart(){
-        print("returnToSettings")
         let transition = SKTransition.fade(withDuration: 1)
         settingsScene = SKScene(fileNamed: "SettingsScene")
         settingsScene.scaleMode = .aspectFill

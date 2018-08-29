@@ -42,7 +42,7 @@ class SettingsScene: SKScene {
         lblCancel?.text = "cancel"
         lblSave?.text = "save"
         lblSound?.text = "sound: on"
-        lblQuit?.text = "quit game"
+        lblQuit?.text = "Colors"
         lblTextures?.text = "textures"
     }
     
@@ -51,20 +51,23 @@ class SettingsScene: SKScene {
             let pos = touch.location(in: self)
             let node = self.atPoint(pos)
             
-            if node == lblCancel || node == lblQuit{
+            if node == lblCancel {
                 print("Cancel touched")
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 returnToStart()
-            }
-            else if node == lblSound{
+            } else if node == lblSound{
                 print("lbl Sound selected, deactivate all sounds")
-            }
-            else if node == lblSave {
+            } else if node == lblSave {
                 print("Save touched")
                 // TODO: save settings
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 returnToStart()
-            }
-            else if node == lblTextures{
+            } else if node == lblTextures{
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 gotoTexturesScene()
+            } else if node == lblQuit {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                goToColorScene()
             }
         }
     }
@@ -88,5 +91,12 @@ class SettingsScene: SKScene {
         settingsSceneTexture = SKScene(fileNamed: "SettingsTexturesScene")
         settingsSceneTexture.scaleMode = .aspectFill
         self.view?.presentScene(settingsSceneTexture, transition: transition)
+    }
+    
+    func goToColorScene(){
+        let transition = SKTransition.fade(withDuration: 1)
+        let colorScene:SKScene! = SKScene(fileNamed: "SettingsColorScene")
+        colorScene.scaleMode = .aspectFill
+        self.view?.presentScene(colorScene, transition: transition)
     }
 }
