@@ -13,6 +13,7 @@
 		0D3BEF4E204B1670007B138C /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D3BEF4D204B1670007B138C /* StartScene.sks */; };
 		0D3BEF50204B16B8007B138C /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3BEF4F204B16B8007B138C /* StartScene.swift */; };
 		0D4FC206204B209000879FEB /* SettingsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D4FC205204B209000879FEB /* SettingsScene.sks */; };
+		0D52D51621378A240050140B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D52D51521378A240050140B /* GameKit.framework */; };
 		0D5D31962045D25D00222197 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5D31952045D25D00222197 /* AppDelegate.swift */; };
 		0D5D31982045D25D00222197 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D5D31972045D25D00222197 /* GameScene.sks */; };
 		0D5D319A2045D25D00222197 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D5D31992045D25D00222197 /* Actions.sks */; };
@@ -40,6 +41,7 @@
 		0D3BEF4D204B1670007B138C /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
 		0D3BEF4F204B16B8007B138C /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		0D4FC205204B209000879FEB /* SettingsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingsScene.sks; sourceTree = "<group>"; };
+		0D52D51521378A240050140B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		0D5D31922045D25D00222197 /* PixlPong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixlPong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D5D31952045D25D00222197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D5D31972045D25D00222197 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -67,18 +69,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D52D51621378A240050140B /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D52D51421378A240050140B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D52D51521378A240050140B /* GameKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0D5D31892045D25D00222197 = {
 			isa = PBXGroup;
 			children = (
 				0D5D31942045D25D00222197 /* PixlPong */,
 				0D5D31932045D25D00222197 /* Products */,
 				B20DFFB1211D0B520017AEC1 /* Recovered References */,
+				0D52D51421378A240050140B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,6 +190,11 @@
 					0D5D31912045D25D00222197 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

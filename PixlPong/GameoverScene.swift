@@ -6,6 +6,7 @@
 //  Copyright © 2018 Axkan Software. All rights reserved.
 //
 
+import GameKit
 import SpriteKit
 import GameplayKit
 
@@ -51,6 +52,8 @@ class GameoverScene: SKScene {
         
         let gameoverSound:SKAction = SKAction.playSoundFileNamed("fail.m4a", waitForCompletion: false)
         play(sound: gameoverSound)
+        
+        addScoreToLiderboard()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -66,6 +69,18 @@ class GameoverScene: SKScene {
                 UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 let transition = SKTransition.fade(withDuration: 1)
                 self.view?.presentScene(gameScene, transition: transition)
+            }
+        }
+    }
+    
+    func addScoreToLiderboard(){
+        let bestScore = GKScore(leaderboardIdentifier: GlobalData.shared.LEADERBOARD_ID)
+        bestScore.value = Int64(GlobalData.shared.maxScore)
+        GKScore.report([bestScore]) { (error) in
+            if error != nil {
+                print(error?.localizedDescription)
+            } else {
+                 print("Best Score submitted to your Leaderboard!")
             }
         }
     }

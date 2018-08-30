@@ -16,6 +16,12 @@ class GlobalData {
     private init(){
     }
     
+    var LEADERBOARD_ID:String {
+        get {
+            return "com.score.pixlpong"
+        }
+    }
+    
     // MARK: - Score -
     var maxScore:Double {
         get {

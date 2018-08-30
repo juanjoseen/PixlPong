@@ -31,31 +31,36 @@ class SettingsTexturesScene: SKScene{
     override func didMove(to view: SKView) {
         self.size = CGSize(width: screenWidth, height: screenHeight)
 
-        barTexture = self.childNode(withName: "barTexture") as? SKLabelNode
+        barTexture  = self.childNode(withName: "barTexture") as? SKLabelNode
         ballTexture = self.childNode(withName: "ballTexture") as? SKLabelNode
-        backButton = self.childNode(withName: "backButton") as? SKLabelNode
+        backButton  = self.childNode(withName: "backButton") as? SKLabelNode
 
-        barTexture?.fontName = GlobalData.shared.fontName
+        barTexture?.fontName  = GlobalData.shared.fontName
         ballTexture?.fontName = GlobalData.shared.fontName
-        backButton?.fontName = GlobalData.shared.fontName
+        backButton?.fontName  = GlobalData.shared.fontName
 
-        sknWoodTextureBar = self.childNode(withName: "sknWoodTexture") as? SKSpriteNode
-        sknRWoodTextureBar = self.childNode(withName: "sknRWoodTexture") as? SKSpriteNode
+        sknWoodTextureBar         = self.childNode(withName: "sknWoodTexture")         as? SKSpriteNode
+        sknRWoodTextureBar        = self.childNode(withName: "sknRWoodTexture")        as? SKSpriteNode
         sknBrushedMetalTextureBar = self.childNode(withName: "sknBrushedMetalTexture") as? SKSpriteNode
-        sknChessTextureBar = self.childNode(withName: "sknChessTexture") as? SKSpriteNode
-        sknConcretTextureBar = self.childNode(withName: "sknConcretTexture") as? SKSpriteNode
-        sknVintageClayTextureBar = self.childNode(withName: "sknVintageClayTexture") as? SKSpriteNode
+        sknChessTextureBar        = self.childNode(withName: "sknChessTexture")        as? SKSpriteNode
+        sknConcretTextureBar      = self.childNode(withName: "sknConcretTexture")      as? SKSpriteNode
+        sknVintageClayTextureBar  = self.childNode(withName: "sknVintageClayTexture")  as? SKSpriteNode
 
-        sknHypTextureBall = self.childNode(withName: "sknHypTextureBall") as? SKSpriteNode
+        sknHypTextureBall   = self.childNode(withName: "sknHypTextureBall")   as? SKSpriteNode
         sknChessTextureBall = self.childNode(withName: "sknChessTextureBall") as? SKSpriteNode
 
-        sknHypTextureBall?.texture = SKTexture(image: UIImage(named: "sknHypTextureBall")!.circleMasked!)
+        sknHypTextureBall?.texture   = SKTexture(image: UIImage(named: "sknHypTextureBall")!.circleMasked!)
         sknChessTextureBall?.texture = SKTexture(image: UIImage(named: "sknChessTextureBall")!.circleMasked!)
 
         selectedNodeBar = self.childNode(withName: "selectedNodeBar") as? SKSpriteNode
         selectedNodeBar?.alpha = 0.0
         selectedNodeBall = self.childNode(withName: "selectedNodeBall") as? SKSpriteNode
         selectedNodeBall?.alpha = 0.0
+        
+        let rightX:CGFloat = (screenWidth - backButton!.frame.width - 30)/2
+        let downY:CGFloat = 0 - screenHeight/2 + 25
+        
+        backButton?.position = CGPoint(x: rightX, y: downY)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -71,16 +76,14 @@ class SettingsTexturesScene: SKScene{
                     selectedNodeBar?.position = tmpNode.position
                     selectedNodeBar?.run(secuence)
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                }
-                else{
+                } else {
                     GlobalData.shared.ballTexture = (tmpNode.name)!
                     GlobalData.shared.useBallTextures = true
                     selectedNodeBall?.position = tmpNode.position
                     selectedNodeBall?.run(secuence)
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 }
-            }
-            else{
+            } else {
                 switch node.name{
                 case backButton?.name:
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
