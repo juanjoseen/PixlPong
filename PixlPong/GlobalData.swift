@@ -18,7 +18,7 @@ class GlobalData {
     
     var LEADERBOARD_ID:String {
         get {
-            return "com.score.pixlpong"
+            return "global_pixlpong_leaderboard"
         }
     }
     
