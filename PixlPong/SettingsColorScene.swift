@@ -31,8 +31,8 @@ class SettingsColorScene: SKScene {
     override func didMove(to view: SKView) {
         self.size = CGSize(width: screenWidth, height: screenHeight)
         
-        selectedNodeBar  = self.childNode(withName: "selectedNodeBar")  as! SKSpriteNode
-        selectedNodeBall = self.childNode(withName: "selectedNodeBall") as! SKSpriteNode
+        selectedNodeBar  = (self.childNode(withName: "selectedNodeBar")  as! SKSpriteNode)
+        selectedNodeBall = (self.childNode(withName: "selectedNodeBall") as! SKSpriteNode)
         
         selectedNodeBar.alpha  = 0
         selectedNodeBall.alpha = 0
