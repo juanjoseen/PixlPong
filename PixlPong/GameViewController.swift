@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import GameKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController {
-
+class GameViewController: UIViewController, GKGameCenterControllerDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        authenticateLocalPlayer()
         
         // Load 'StartScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.
@@ -61,5 +64,37 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    // MARK: - GameCenter -
+    var gcEnabled = Bool()
+    var gcDefaultLeaderBoard = String()
+    
+    func authenticateLocalPlayer(){
+        let localPlayer:GKLocalPlayer = GKLocalPlayer.localPlayer()
+        
+        localPlayer.authenticateHandler = {(viewController, error) in
+            if viewController != nil {
+                self.present(viewController!, animated: true, completion: nil)
+            } else if localPlayer.isAuthenticated {
+                self.gcEnabled = true
+                
+                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardId, error) in
+                    if error != nil {
+                        print(error)
+                    } else {
+                        self.gcDefaultLeaderBoard = leaderboardId!
+                    }
+                })
+            } else {
+                self.gcEnabled = false
+                print("Local player could not be authenticated!")
+                print(error)
+            }
+        }
+    }
+    
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
     }
 }

@@ -16,6 +16,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var remainingLives:Int = 5 {
         didSet {
             lblLifes.text = String(format: "%d x", remainingLives)
+            lblLifes.zPosition = 30
+            heartNode.zPosition = 31
+        }
+    }
+    
+    var score:Double = 0 {
+        didSet{
+            lblScore.text = "Score: \(Int(score))"
+            lblScore.zPosition = 30
+            GlobalData.shared.localScore = score
         }
     }
     
@@ -41,13 +51,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var rightBar:SKSpriteNode!
     
     let bitSound:SKAction = SKAction.playSoundFileNamed("bit.wav", waitForCompletion: false)
-    
-    var score:Double = 0 {
-        didSet{
-            lblScore.text = "Score: \(Int(score))"
-            GlobalData.shared.localScore = score
-        }
-    }
     
     override func sceneDidLoad() {
         self.lastUpdateTime = 0
@@ -116,7 +119,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func configBall(){
         if GlobalData.shared.useBallTextures {
-            // TODO: implement texture in ball node
             let textureName:String = GlobalData.shared.ballTexture
             let texture:SKTexture = SKTexture(image: UIImage(named: textureName)!.circleMasked!)
             ballNode.texture = texture
@@ -143,7 +145,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         if GlobalData.shared.useBarTextures {
-            // TODO: implement texture in bar nodes
             let textureName:String = GlobalData.shared.barTexture
             let texture:SKTexture = SKTexture(imageNamed: textureName)
             
@@ -377,6 +378,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if first.categoryBitMask == ballCategory {
             switch second.categoryBitMask {
                 case bottomCategory:
+                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                     if remainingLives > 0 {
                         remainingLives -= 1
                         removeHeart(remainingLives)
@@ -390,6 +392,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let dy:CGFloat = (ballNode.physicsBody?.velocity.dy)!
                     score += Double(sqrt(dx*dx + dy*dy) / 100.0)
                     play(sound: bitSound)
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     break;
                 default:
                     break;
